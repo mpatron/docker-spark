@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  master:
+    image: mpatron/docker-spark:2.4.8
+    container_name: master
+    ports:
+      - 4040:4040
+      - 7077:7077
+      - 8080:8080
+      - 6066:6066
+    command: ["/usr/bin/supervisord", "--configuration=/opt/conf/master.conf"]
+    volumes:
+      - volume-events-data:/opt/spark-events
+  slave:
+    image: mpatron/docker-spark:2.4.8
+    depends_on:
+      - master
+    ports:
+      - "8081"
+    command: ["/usr/bin/supervisord", "--configuration=/opt/conf/slave.conf"]
+    volumes:
+        - volume-ouput:/opt/output
+        - volume-events-data:/opt/spark-events
+  history-server:
+    image: mpatron/docker-spark:2.4.8
+    container_name: history-server
+    depends_on:
+      - master
+    ports:
+      - "18080:18080"
+    command: ["/usr/bin/supervisord", "--configuration=/opt/conf/history-server.conf"]
+    volumes:
+      - volume-events-data:/opt/spark-events
+volumes:
+  volume-ouput: {}
+  volume-events-data: {}
