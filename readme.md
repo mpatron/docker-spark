@@ -1,5 +1,6 @@
+# Readme
 
-docker build -t mpatron/docker-spark .
+Construction de l'image docker spark.
 
 ~~~bash
 vagrant@ubuntu:~/docker-spark$ docker build -t mpatron/docker-spark .
@@ -31,20 +32,27 @@ vagrant@ubuntu:~/docker-spark$ docker tag b9efb5979927 mpatron/docker-spark:2.4.
 vagrant@ubuntu:~/docker-spark$ docker push mpatron/docker-spark:2.4.8
 ~~~
 
+Lancer docker-compose une fois que l'image est déposé. Elle est à jour est déplosé sur [dockerhub](https://hub.docker.com/repository/docker/mpatron/docker-spark)
 
+~~~bash
 docker-compose build
 docker-compose up
+~~~
+
+Accéder à la console spark-shell et aussi utiliser [Spark history](http://127.0.0.1:18080)
+
+~~~bash
 docker exec -it master /bin/bash
+spark-shell --master spark://master:7077
+~~~
 
+Eteindre l'ensemble
 
+~~~bash
+docker-compose down
+~~~
 
-Sources : 
+Sources :
 - https://github.com/pavanpkulkarni/docker-spark-image/blob/master/Dockerfile
 - https://github.com/pavanpkulkarni/create-and-run-spark-job
 - https://gist.github.com/vinodkc/9574b55270ba6b7c1369187a5db1d0cb
-
-sudo apt-get install openjdk-8-jdk -y
-
-spark-shell --master spark://master:7077
-
-docker-compose down
