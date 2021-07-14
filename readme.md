@@ -53,6 +53,7 @@ docker-compose down
 ~~~
 
 Sources :
-- https://github.com/pavanpkulkarni/docker-spark-image/blob/master/Dockerfile
-- https://github.com/pavanpkulkarni/create-and-run-spark-job
-- https://gist.github.com/vinodkc/9574b55270ba6b7c1369187a5db1d0cb
+
+- [Exemple de dockerfile](https://github.com/pavanpkulkarni/docker-spark-image/blob/master/Dockerfile)
+- [Script de lancement](https://github.com/pavanpkulkarni/create-and-run-spark-job)
+- [Exemple de code spark en scala avec des listeners](https://gist.github.com/vinodkc/9574b55270ba6b7c1369187a5db1d0cb)
