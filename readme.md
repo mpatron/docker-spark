@@ -69,6 +69,11 @@ curl -X POST -d 'json={"foo":"bar"}' http://fluentd:9880/app.log
 
 tar -zcvf "/mnt/c/TEMP/docker-spark-$(date '+%Y-%m-%d').tar.gz" docker-spark
 
+docker exec -it master /bin/bash
+spark-shell 
+:load SparkListenerDemo.scala
+
+
 Sources :
 
 - [Exemple de dockerfile](https://github.com/pavanpkulkarni/docker-spark-image/blob/master/Dockerfile)
