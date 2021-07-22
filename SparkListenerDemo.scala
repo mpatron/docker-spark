@@ -1,6 +1,23 @@
 import org.joda.time.format.DateTimeFormat
 import org.apache.spark.SparkContext
 import org.apache.spark.scheduler.{SparkListener, SparkListenerJobEnd, SparkListenerJobStart, SparkListenerStageCompleted, SparkListenerTaskEnd, SparkListenerStageSubmitted, SparkListenerTaskStart}
+
+import scala.http.{Http, HttpOptions}
+
+
+class LogManager {
+  def log( a:String, b:String ) : String = {
+      val data = (new StringBuilder()).append("\"{\id:\"").append(a).append("\",\"message:\"").append(b).append("\"}\"").toString()
+      val result = Http("http://fluentd:9880/app.log").postData(data)
+        .header("Content-Type", "application/json")
+        .header("Charset", "UTF-8")
+        .option(HttpOptions.readTimeout(10000)).asString
+      return result
+   }
+}
+
+
+
 val sparkContext = spark.sparkContext
 val sparkSession = spark
 val sqlContext = sparkSession.sqlContext
@@ -18,7 +35,7 @@ trait JobEventConsumer {
 /**************Job Listener Example **************/
 class JobEventManager extends SparkListener {
   private val consumerMap: scala.collection.mutable.Map[String, JobEventConsumer] = scala.collection.mutable.Map[String, JobEventConsumer]()
-  
+
   def addEventConsumer(SparkContext: SparkContext, id: String, consumer: JobEventConsumer) {
     consumerMap += (id -> consumer)
   }

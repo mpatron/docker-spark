@@ -22,6 +22,7 @@ RUN apt-get -y install supervisor
 # Debugging
 RUN apt-get install net-tools vim nmap -y
 
+COPY log4fluentd-0.0.1-SNAPSHOT.jar /opt
 # Set spark home 
 ENV SPARK_HOME /opt/spark
 ENV PATH $SPARK_HOME/bin:$PATH
