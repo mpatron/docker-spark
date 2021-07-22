@@ -31,7 +31,19 @@ services:
       - "18080:18080"
     command: ["/usr/bin/supervisord", "--configuration=/opt/conf/history-server.conf"]
     volumes:
-      - volume-events-data:/opt/spark-events
+      - volume-events-data:/opt/spark-event
+  fluentd:
+#    image: fluent/fluentd:v1.3-debian-1
+    build: ./fluentd
+    container_name: fluentd
+    depends_on:
+      - master
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    volumes:
+      - volume-fluentd-data:/fluentd/log
 volumes:
   volume-ouput: {}
   volume-events-data: {}
+  volume-fluentd-data: {}

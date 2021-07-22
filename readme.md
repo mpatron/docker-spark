@@ -52,6 +52,15 @@ Eteindre l'ensemble
 docker-compose down
 ~~~
 
+
+curl -XPOST http://localhost:9200/test-index/test-type/1 -H "Content-Type: application/json" -d '{"message": "This is a test document"}'
+curl -X POST -d 'json={"foo":"bar"}' http://fluentd:24224/app.log
+
+Source du docker de fluentd
+https://github.com/fluent/fluentd-docker-image/tree/master/v1.13/alpine
+
+
+
 Sources :
 
 - [Exemple de dockerfile](https://github.com/pavanpkulkarni/docker-spark-image/blob/master/Dockerfile)
