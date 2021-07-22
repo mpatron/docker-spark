@@ -56,10 +56,18 @@ docker-compose down
 curl -XPOST http://localhost:9200/test-index/test-type/1 -H "Content-Type: application/json" -d '{"message": "This is a test document"}'
 curl -X POST -d 'json={"foo":"bar"}' http://fluentd:24224/app.log
 
+Docuementation plugings
+https://docs.fluentd.org/input/http
+
 Source du docker de fluentd
 https://github.com/fluent/fluentd-docker-image/tree/master/v1.13/alpine
 
+chmod +x ./fluentd/entrypoint.sh
+docker-compose build
 
+curl -X POST -d 'json={"foo":"bar"}' http://fluentd:9880/app.log
+
+tar -zcvf "/mnt/c/TEMP/docker-spark-$(date '+%Y-%m-%d').tar.gz" docker-spark
 
 Sources :
 
