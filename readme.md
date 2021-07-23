@@ -67,8 +67,9 @@ docker-compose build
 
 curl -X POST -d 'json={"foo":"bar"}' http://fluentd:9880/app.log
 
-tar -zcvf "/mnt/c/TEMP/docker-spark-$(date '+%Y-%m-%d').tar.gz" docker-spark
 
+tar -zcvf "/mnt/c/TEMP/docker-spark-$(date '+%d-%m-%Y_%H-%M-%S').tar.gz" docker-spark
+cp /mnt/c/Users/mpatron/eclipse-workspace/log4fluentd/target/log4fluentd-0.0.1-SNAPSHOT-jar-with-dependencies.jar ~/docker-spark/log4fluentd.jar
 docker exec -it master /bin/bash
 spark-shell 
 :load SparkListenerDemo.scala
