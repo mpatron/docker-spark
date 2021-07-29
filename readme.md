@@ -80,3 +80,6 @@ Sources :
 - [Exemple de dockerfile](https://github.com/pavanpkulkarni/docker-spark-image/blob/master/Dockerfile)
 - [Script de lancement](https://github.com/pavanpkulkarni/create-and-run-spark-job)
 - [Exemple de code spark en scala avec des listeners](https://gist.github.com/vinodkc/9574b55270ba6b7c1369187a5db1d0cb)
+
+pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+sudo apt autoclean -y && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove --purge -y
