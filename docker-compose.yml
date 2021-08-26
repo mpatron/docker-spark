@@ -2,7 +2,7 @@ version: '3'
 
 services:
   master:
-    image: mpatron/docker-spark:2.4.8
+    image: mpatron/docker-spark:latest
     container_name: master
     ports:
       - 4040:4040
@@ -13,7 +13,7 @@ services:
     volumes:
       - volume-events-data:/opt/spark-events
   slave:
-    image: mpatron/docker-spark:2.4.8
+    image: mpatron/docker-spark:latest
     depends_on:
       - master
     ports:
@@ -23,7 +23,7 @@ services:
         - volume-ouput:/opt/output
         - volume-events-data:/opt/spark-events
   history-server:
-    image: mpatron/docker-spark:2.4.8
+    image: mpatron/docker-spark:latest
     container_name: history-server
     depends_on:
       - master
