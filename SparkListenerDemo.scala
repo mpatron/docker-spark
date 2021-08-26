@@ -188,6 +188,7 @@ class TaskEventConsumerImpl extends TaskEventConsumer{
         s"\n<----------------")
   }
 }
+
 val rm = new TaskEventManager
 rm.addEventConsumer(sparkContext, "RLEC1", new TaskEventConsumerImpl)
 //Register Task event listener
