@@ -5,11 +5,31 @@ import java.util.List;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.SparkContext;
+import org.apache.spark.scheduler.SparkListener;
+import org.apache.spark.scheduler.SparkListenerJobStart;
+import org.apache.spark.scheduler.SparkListenerJobEnd;
+
 
 public class Main {
   public static void main(String[] args) throws Exception {
     SparkSession spark = SparkSession.builder().appName("JavaSparkPi").getOrCreate();
-    JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
+    SparkContext sc = spark.sparkContext();
+    JavaSparkContext jsc = new JavaSparkContext(sc);
+
+    sc.addSparkListener(new SparkListener() {
+      @Override
+      public void onJobStart(SparkListenerJobStart jobStart) {
+        super.onJobStart(jobStart);
+      }
+  
+      @Override
+      public void onJobEnd(SparkListenerJobEnd jobEnd) {
+        super.onJobEnd(jobEnd);
+      }
+    
+    });
+
     int slices = (args.length == 1) ? Integer.parseInt(args[0]) : 2;
     int n = 100000 * slices;
     List<Integer> l = new ArrayList<>(n);
