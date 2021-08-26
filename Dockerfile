@@ -36,6 +36,9 @@ COPY conf/history-server.conf /opt/conf/history-server.conf
 COPY conf/spark-defaults.conf /opt/spark/conf/spark-defaults.conf
 RUN  mkdir -p /opt/spark-events
 
+COPY example/spark-java2/target/uber-java-spark-examples-1.0-SNAPSHOT.jar /opt/uber-java-spark-examples-1.0-SNAPSHOT.jar
+
+
 # expose port 8080 for spark UI
 EXPOSE 4040 6066 7077 8080 18080 8081
 
