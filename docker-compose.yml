@@ -31,7 +31,7 @@ services:
       - "18080:18080"
     command: ["/usr/bin/supervisord", "--configuration=/opt/conf/history-server.conf"]
     volumes:
-      - volume-events-data:/opt/spark-event
+      - volume-events-data:/opt/spark-events
   fluentd:
 #    image: fluent/fluentd:v1.3-debian-1
     build: ./fluentd
@@ -46,5 +46,10 @@ services:
       - volume-fluentd-data:/fluentd/log
 volumes:
   volume-ouput: {}
-  volume-events-data: {}
+  volume-events-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/mpatron/events'
   volume-fluentd-data: {}
