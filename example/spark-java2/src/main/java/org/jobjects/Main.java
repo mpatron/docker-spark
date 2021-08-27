@@ -9,10 +9,13 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.scheduler.SparkListener;
 import org.apache.spark.scheduler.SparkListenerJobStart;
 import org.apache.spark.scheduler.SparkListenerJobEnd;
-
+import org.apache.log4j.Logger;
 
 public class Main {
+  final static Logger logger = Logger.getLogger(org.jobjects.Main.class);
+
   public static void main(String[] args) throws Exception {
+    
     SparkSession spark = SparkSession.builder().appName("JavaSparkPi").getOrCreate();
     SparkContext sc = spark.sparkContext();
     JavaSparkContext jsc = new JavaSparkContext(sc);
@@ -21,11 +24,13 @@ public class Main {
       @Override
       public void onJobStart(SparkListenerJobStart jobStart) {
         super.onJobStart(jobStart);
+        logger.warn("!!!! onJobStart !!!!! ");
       }
   
       @Override
       public void onJobEnd(SparkListenerJobEnd jobEnd) {
         super.onJobEnd(jobEnd);
+        logger.warn("!!!! onJobEnd !!!!! ");
       }
     
     });
