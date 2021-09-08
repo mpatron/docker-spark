@@ -31,9 +31,12 @@ ENV PATH $SPARK_HOME/bin:$PATH
 COPY conf/master.conf /opt/conf/master.conf
 COPY conf/slave.conf /opt/conf/slave.conf
 COPY conf/history-server.conf /opt/conf/history-server.conf
+COPY conf/log4j.properties /opt/spark/conf/log4j.properties
 
 # Adding configurations for history server
 COPY conf/spark-defaults.conf /opt/spark/conf/spark-defaults.conf
+
+# Expose events directory
 RUN  mkdir -p /opt/spark-events
 
 COPY example/spark-java2/target/uber-java-spark-examples-1.0-SNAPSHOT.jar /opt/uber-java-spark-examples-1.0-SNAPSHOT.jar

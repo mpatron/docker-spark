@@ -24,13 +24,13 @@ public class Main {
       @Override
       public void onJobStart(SparkListenerJobStart jobStart) {
         super.onJobStart(jobStart);
-        logger.warn("!!!! onJobStart !!!!! ");
+        logger.debug("!!!! onJobStart !!!!! ");
       }
   
       @Override
       public void onJobEnd(SparkListenerJobEnd jobEnd) {
         super.onJobEnd(jobEnd);
-        logger.warn("!!!! onJobEnd !!!!! ");
+        logger.debug("!!!! onJobEnd !!!!! ");
       }
     
     });

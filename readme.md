@@ -84,4 +84,7 @@ Sources :
 pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
 sudo apt autoclean -y && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove --purge -y
 
+docker build -t mpatron/docker-spark .
+docker-compose up
+docker exec -it master /bin/bash
 spark-submit --master spark://master:7077 --class org.jobjects.Main  /opt/uber-java-spark-examples-1.0-SNAPSHOT.jar 100
