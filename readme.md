@@ -9,6 +9,9 @@ cd ~/docker-spark/example/spark-java2
 mvn package
 cd ../..
 
+# In /etc/containers/registries.conf add :
+unqualified-search-registries = ['registry.fedoraproject.org', 'registry.access.redhat.com', 'registry.centos.org', 'docker.io']
+
 docker login docker.io -u mpatron
 docker image tag localhost/mpatron/docker-spark docker.io/mpatron/docker-spark:latest
 docker image push docker.io/mpatron/docker-spark:latest
