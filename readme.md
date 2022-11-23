@@ -1,6 +1,20 @@
 # Readme
 
-Construction de l'image docker spark.
+# Envirronement de developpemnt
+
+~~~bash
+sudo apt install podman podman-docker openjdk-17-jdk maven
+git clone https://github.com/mpatron/docker-spark
+cd ~/docker-spark/example/spark-java2
+mvn package
+cd ../..
+
+docker login docker.io -u mpatron
+docker image tag localhost/mpatron/docker-spark docker.io/mpatron/docker-spark:latest
+docker image push docker.io/mpatron/docker-spark:latest
+~~~
+
+# Construction de l'image docker spark.
 
 ~~~bash
 vagrant@ubuntu:~/docker-spark$ docker build -t mpatron/docker-spark .
@@ -35,8 +49,8 @@ vagrant@ubuntu:~/docker-spark$ docker push mpatron/docker-spark:2.4.8
 Lancer docker-compose une fois que l'image est déposé. Elle est à jour est déplosé sur [dockerhub](https://hub.docker.com/repository/docker/mpatron/docker-spark)
 
 ~~~bash
-docker-compose build
-docker-compose up
+sudo docker-compose build
+sudo docker-compose up
 ~~~
 
 Accéder à la console spark-shell et aussi utiliser [Spark history](http://127.0.0.1:18080)
